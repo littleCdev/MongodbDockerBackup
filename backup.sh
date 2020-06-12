@@ -45,11 +45,11 @@ if [ ${BACKUP_ALL} = true ] ; then
 fi
 
 # backup all filtered databases
-for database in "${DATABASES_TO_BACKUP[@]}"
+for databasename in "${DATABASES_TO_BACKUP[@]}"
 do
    :
-   echo "backup for ${database}"
-   docker exec $DOCKER_NAME sh -c "exec mongodump --host=${MONGOHOST} --port=${MONGOPORT} -d ${database} --archive" > "${BACKUP_LOCATION}${databasename}_${TIMESTAMP}"
+   echo "backup for ${databasename}"
+   docker exec $DOCKER_NAME sh -c "exec mongodump --host=${MONGOHOST} --port=${MONGOPORT} -d ${databasename} --archive" > "${BACKUP_LOCATION}${databasename}_${TIMESTAMP}"
 done
 
 
