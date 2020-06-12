@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # backupname is $Databasename_$TIMESTAMP
-BACKUP_LOCATION="/home/littlecheetah/backup/mongodb/"
+BACKUP_LOCATION="/home//backup/mongodb/"
 TIMESTAMP=$(date +'%Y%m%d%H')
 
 #mongodb host
-MONGOHOST="10.0.0.1"
+MONGOHOST="localhost"
 MONGOPORT=27017
 
 # databases to backup
@@ -49,7 +49,7 @@ for database in "${DATABASES_TO_BACKUP[@]}"
 do
    :
    echo "backup for ${database}"
-   docker exec $DOCKER_NAME sh -c "exec mongodump --host=${MONGOHOST} --port=${MONGOPORT} -d ${database} --archive" > "${BACKUP_LOCATION}${DATABASE_NAME}_${TIMESTAMP}"
+   docker exec $DOCKER_NAME sh -c "exec mongodump --host=${MONGOHOST} --port=${MONGOPORT} -d ${database} --archive" > "${BACKUP_LOCATION}${databasename}_${TIMESTAMP}"
 done
 
 
