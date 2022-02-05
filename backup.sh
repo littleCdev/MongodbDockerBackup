@@ -42,7 +42,7 @@ if [ ${BACKUP_ALL} = true ] ; then
   while read line; do
      ar=($line);
      databasename=${ar[0]};
-    if [[ ! " ${DATABASES_TO_EXCLUDE[@]} " =~ " ${databasename} " ]]; then
+    if [[ ! " ${DATABASES_TO_EXCLUDE[@]} " =~ "${databasename}" ]]; then
       DATABASES_TO_BACKUP+=($databasename)
     fi
   done <<< $(docker exec $DOCKER_NAME sh -c "exec echo show dbs| mongo -quiet --host=${MONGOHOST} --port=${MONGOPORT}")
