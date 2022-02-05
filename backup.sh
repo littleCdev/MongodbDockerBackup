@@ -29,8 +29,12 @@ fi
 docker pull --quiet mongo
 
 #create container with given name if it does not exist
-[[ $(docker ps -f "name=${DOCKER_NAME}" --format '{{.Names}}') == "${DOCKER_NAME}" ]] ||
+[[ $(docker ps -a -f "name=${DOCKER_NAME}" --format '{{.Names}}') == "${DOCKER_NAME}" ]] ||
 docker run --name "${DOCKER_NAME}" -d mongo
+
+#start container if it is stopped
+[[ $(docker ps -f "name=${DOCKER_NAME}" --format '{{.Names}}') == "${DOCKER_NAME}" ]] ||
+docker start "${DOCKER_NAME}"
 
 
 # get all databases from mongodb
